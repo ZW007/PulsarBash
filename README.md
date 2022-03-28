@@ -11,4 +11,7 @@ I also built a docker image using the `Dockerfile` (executable together with the
 
 `docker run -it --rm wangzhen1997/pulsar_bash:1` 
 
-**But** you will get broker connection error, because the `pulsar_bash` runs inside a container and it cannot communicate with host network. One solution is to run a `broker` background process along with the `bash_runtime` process in one container, but I think this is not scalable and practical. I am having diffciluity on deploying this [pulsar-standalone](https://hub.docker.com/r/apachepulsar/pulsar-standalone) on k8s. If succesfully, I can expose it as a service and then my `bash_runtime` can talk with broker ...
+<!-- **But** you will get broker connection error, because the `pulsar_bash` runs inside a container and it cannot communicate with host network. One solution is to run a `broker` background process along with the `bash_runtime` process in one container, but I think this is not scalable and practical. I am having diffciluity on deploying this [pulsar-standalone](https://hub.docker.com/r/apachepulsar/pulsar-standalone) on k8s. If succesfully, I can expose it as a service and then my `bash_runtime` can talk with broker ...
+ -->
+ 
+Next, we show how to run a Pulsar cluster on kubernetes, and let the bash function deployment to communicate with this kubernets Pulsar instead of local Pulsar binary.  
