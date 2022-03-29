@@ -80,4 +80,4 @@ If you cannot install the C++ client dependencies, that is okay. I provided a do
   
 </details>
 
-  Thank you for reading this. This is an interesting task to get me familiar with Pulsar. I know this implementation is kinda silly, but I believe all the goals have been met. Please feel free to ask if you have any questions. 
+  Thank you for reading this. This is an interesting task to get me familiar with Pulsar. Please feel free to ask if you have any questions. 
