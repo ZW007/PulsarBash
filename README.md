@@ -7,7 +7,7 @@ The OS I am using is Ubuntu 18.04.
 <details>
   <summary> Click to expand: A bash script</summary>
   <br>
-  Please refer to the bash script `/src/exclamation.sh` It adds an exclamation at the end of the input.  
+  Please refer to the bash script /src/exclamation.sh in the repo. It adds an exclamation at the end of the input.  
  
 </details>
 
@@ -36,10 +36,12 @@ If you cannot install the C++ client dependencies, you can call me, or I provide
   <summary> Click to expand: Fuction as image and StatefulSet</summary>
   <br>
    <b>Docker image</b>
-   Please refer to the `Dockerfile` in the repo for details on building a Docker image for this bashruntime: bascially you choose the approriate base image, and then COPY the execuable together with dependience and libraies to the image. I kept it in mind that the image should be small. It is pushed to  [Dockerhub](https://hub.docker.com/r/wangzhen1997/pulsar_bash) so you can give it a try.   
+   Please refer to the `Dockerfile` in the repo for details on building a Docker image for this bashruntime: bascially you choose the approriate base
+   image, and then COPY the execuable together with dependience and libraies to the image. I kept it in mind that the image should be small. It is pushed    to [DockerHub](https://hub.docker.com/r/wangzhen1997/pulsar_bash), so you can give it a try.  
+  
   <br>
   <b>Deploy the StatefulSet on Kubernetes</b> 
-  
+  For this part, I except it you to have a Pulsar deployed on Kubernetes first, so if you still do not have a Kubernetes cluster installed, you can try this [k8sinstall-kubeadm](https://github.com/cncamp/101/blob/master/k8s-install/k8s-by-kubeadm/3.k8s-install.md). They you can run this to install Pulsar on Kubernetes. 
  
 </details>
 
