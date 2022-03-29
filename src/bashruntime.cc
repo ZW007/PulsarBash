@@ -5,15 +5,15 @@
 #include <sstream>
 #include <unistd.h>
 
-// g++ ./bashruntime.cc -o bashruntime /usr/lib/libpulsar.so -I ../include
-// docker build . -t pulsar_bash:1 -f /home/zhen/Desktop/job/streamnative/task/Dockerfile
-// docker run -it --rm -it pulsar_bash:1 
+// g++ ./bashruntime.cc -o bashruntime /usr/lib/libpulsar.so -I ../include   // dependencies resolved only
+// docker build . -t wangzhen1997/pulsarbash:1 -f Dockerfile
+// docker run -it --rm -it wangzhen1997/pulsarbash:1 
+// docker run --network="host" -it --rm -it wangzhen1997/pulsarbash:1
 using namespace pulsar;
 
 #define PREFIX "persistent://public/default/"
 #define BASH_SCRIPT_PATH "exclamation.sh"
-#define BROKER "pulsar://host.docker.internal:6650"
-// #define BASH_SCRIPT_PATH "/home/zhen/Desktop/job/streamnative/task/src/exclamation.sh"
+std::string BROKER = "pulsar://" ; //10.98.135.188:6650
 
 int produceSth(std::string userTopic, std::string content) {
     Client client(BROKER);
@@ -49,7 +49,7 @@ int produceSth(std::string userTopic, std::string content) {
 }
 
 Message thenConsume(std::string userTopic) {
-    Client client("pulsar://localhost:6650");
+    Client client(BROKER);
     Consumer consumer;
     ConsumerConfiguration config;
     config.setSubscriptionInitialPosition(InitialPositionEarliest);
@@ -96,7 +96,21 @@ std::string bash(Message msgGotten, std::string bashPath) {
     //std::cout << "LOL " << buf.str() << std::endl << std::endl << std::endl;
     return buf.str();
 }
-int main() {
+int main(int argc, char** argv) {
+    if(argc==1){
+        // BROKER = BROKER + "pulsar-mini-proxy.pulsar.svc.cluster.local";
+        // BROKER = BROKER + "10.98.135.188:6650";
+        BROKER = BROKER + "localhost:6650";
+    }
+    if(argc==2){
+        std::string address(argv[1]);
+        BROKER = BROKER + address + ":6650";       
+    }
+    if(argc>2){
+        std::cout << "incorrect input";
+        exit(1);
+    }
+    
     produceSth("topicForConsume",
                "It is a good day my friends");  // mimic there is an existing topic in broker
 
@@ -114,5 +128,8 @@ int main() {
     std::string returnFromAnotherTopic = thenConsume("anotherTopic").getDataAsString();
     std::cout << "After passing bash output to anotherTopic, we can consume and get: "
               << returnFromAnotherTopic << std::endl;
+
+    while(true)
+        sleep(86400);
     return 0;
 }

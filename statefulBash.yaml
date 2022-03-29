@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: stateful-bashruntime
+spec:
+  serviceName: "bashruntime1"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: bashruntime
+  template:
+    metadata:
+      labels:
+        app: bashruntime
+    spec:
+      containers:
+      - name: pulsarbash
+        image: wangzhen1997/pulsarbash:1
+        args: ["10.98.135.188"] #please change it your pulsar cluster IP.

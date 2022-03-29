@@ -5,6 +5,5 @@ COPY lib/libstdc* /usr/lib/x86_64-linux-gnu/
 COPY ./* /pulsar_bash/
 
 WORKDIR /pulsar_bash
-# RUN chmod 777 ./bashruntime.sh
-# ENTRYPOINT ./bashruntime.sh
-ENTRYPOINT ./bashruntime
+ENTRYPOINT ["./bashruntime"]
+CMD [ "localhost" ]
