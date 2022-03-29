@@ -27,7 +27,7 @@ If you have [standalone Pulsar](https://pulsar.apache.org/docs/en/standalone/#st
   
 If you cannot install the C++ client dependencies, that is okay. I provided a docker image of this bashruntime, so you do not need to worry about the indepencies and compiling anymore.  
   
- `docker pull wangzhen1997/pulsarbash:1`
+ `docker pull wangzhen1997/pulsarbash:1` 
   
 `docker run --network="host" -it --rm -it wangzhen1997/pulsarbash:1 localhost`
   
@@ -51,15 +51,15 @@ If you cannot install the C++ client dependencies, that is okay. I provided a do
    <b>Docker image</b>
   
    Please refer to the `Dockerfile` in the repo for details on building a Docker image for this bashruntime: bascially you choose the approriate base
-   image, and then COPY the execuable together with dependience and libraies to the image. I kept it in mind that the image should be small. It is pushed    to [DockerHub](https://hub.docker.com/r/wangzhen1997/pulsarbash), so you can give it a try. 
+   image, and then COPY the execuable together with dependience and libraies to the image. I should have made the image smaller. It is pushed  to [DockerHub](https://hub.docker.com/layers/199987399/wangzhen1997/pulsarbash/1/images/sha256-103a4d0fb08ae7fa18a0830b3f8aca02377a3911fbab5164182bd0e91e869ead?context=repo&tab=layers), so you can give it a try. 
   
   <br>
   
   <b>Deploy the StatefulSet on Kubernetes</b> 
   
-  For this part, I except you to have a Pulsar deployed on Kubernetes first, so if you do not have a Kubernetes cluster installed, you can try this [k8sinstall-kubeadm](https://github.com/cncamp/101/blob/master/k8s-install/k8s-by-kubeadm/3.k8s-install.md). They you can follow [this](https://pulsar.apache.org/docs/en/kubernetes-helm/#step-1-install-pulsar-helm-chart) to install Pulsar on Kubernetes. Simply copy and paste all 1-6 in step 1 and wait for a few mins to get the Pulsar service ready. Please Do NOT use minikube because it brought me many problems. 
+  For this part, I except you to have a Pulsar deployed on Kubernetes first, so if you do not have a Kubernetes cluster installed, you can try this [k8sinstall-kubeadm](https://github.com/cncamp/101/blob/master/k8s-install/k8s-by-kubeadm/3.k8s-install.md).  Please Do NOT use minikube because it brought me many problems. They you can follow [this](https://pulsar.apache.org/docs/en/kubernetes-helm/#step-1-install-pulsar-helm-chart) to install Pulsar on Kubernetes. Simply copy and paste all 1-6 in step 1 and wait for a few mins to get the Pulsar service ready.
  
-  If you try get service and see pulsar-mini-proxy service has an CLUSTER-IP then your pods within this cluster can talk with Pulsar using this IP. To get an EXTERNAL-IP, you might need to try EKS which provides you a real load-balancer, but CLUSTER-IP is enough for our case. 
+  If you try `get service` and see `pulsar-mini-proxy` service has an CLUSTER-IP then your pods within this cluster can talk with Pulsar using this IP. To get an EXTERNAL-IP, you might need to try EKS which provides you a real load-balancer, but CLUSTER-IP is enough for our case. 
   
   ` kubectl get service -n pulsar`
   ![image](https://user-images.githubusercontent.com/45562036/160528277-0da91937-84ac-41f0-a339-6082e81782eb.png)
@@ -78,4 +78,4 @@ If you cannot install the C++ client dependencies, that is okay. I provided a do
   
 </details>
 
-   
+  Thank you for reading this. This is an interesting task to get me familiar with Pulsar. I know this implementation is kinda silly, but I believe all the goals have been met. Please feel free to ask if you have any questions. 
