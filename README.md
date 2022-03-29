@@ -14,7 +14,9 @@ The OS I am using is Ubuntu 18.04.
 ## Goal two
 <details>
   <summary> Click to expand: A bash runtime</summary>
+  
  <br>
+  
   The C++ code is straightforward: it consumes data from one pulsar topic, then call the `system()` function to execute the bash, and finially return the
   bash script result to another pulsar topic. 
   
