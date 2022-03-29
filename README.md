@@ -23,7 +23,7 @@ The OS I am using is Ubuntu 18.04.
 
 `g++ ./bashruntime.cc -o bashruntime /usr/lib/libpulsar.so -I ../include`
 
-If you have [standalone Pulsar](https://pulsar.apache.org/docs/en/standalone/#start-pulsar-standalone) running on your local machine, you can then run `./bashruntime localhost` where `localhost` is the Pulsar url to see the that we have successfully called the bash script to add an exclamation and pulish it to another topic. 
+If you have [standalone Pulsar](https://pulsar.apache.org/docs/en/standalone/#start-pulsar-standalone) running on your local machine, you can then run `./bashruntime localhost` where `localhost` is the Pulsar url to see that we have gotten the bashruntime work. 
   
 If you cannot install the C++ client dependencies, that is okay. I provided a docker image of this bashruntime, so you do not need to worry about the indepencies and compiling anymore.  
   
