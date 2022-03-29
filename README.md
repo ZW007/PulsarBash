@@ -27,7 +27,14 @@ If you cannot install the C++ client dependencies, you can call me, or I provide
   
 `docker run --network="host" -it --rm -it wangzhen1997/pulsar_bash:1 localhost`
   
-  Here I add `--network="host" ` because the standalone Pulsar is running on your host machine rather than contianer itself, otherwise the localhost of the host machine is not reachable from the container. In the next part, I will cover how can you run the Pulsar in Kubernetes cluster, so your container can directly talk with Pulsar using Pulsar proxy service url.  
+  Here I add `--network="host" ` because the standalone Pulsar is running on your host machine rather than contianer itself, otherwise the localhost of the host machine is not reachable from the container. 
+  
+  If you see the messages "it is a good day my friends" ends with a ! from the terminal, you have it successfully run. 
+  
+  ![image](https://user-images.githubusercontent.com/45562036/160527328-2c1a1167-326e-4200-a21d-c9baeb028ce5.png)
+
+  
+  In the next part, I will cover how can you run the Pulsar in Kubernetes cluster, so your container can directly talk with Pulsar using Pulsar proxy service url.  
  
 </details>
 
@@ -42,10 +49,13 @@ If you cannot install the C++ client dependencies, you can call me, or I provide
   <b>Deploy the StatefulSet on Kubernetes</b> 
   For this part, I except you to have a Pulsar deployed on Kubernetes first, so if you do not have a Kubernetes cluster installed, you can try this [k8sinstall-kubeadm](https://github.com/cncamp/101/blob/master/k8s-install/k8s-by-kubeadm/3.k8s-install.md). They you can follow [this](https://pulsar.apache.org/docs/en/kubernetes-helm/#step-1-install-pulsar-helm-chart) to install Pulsar on Kubernetes. Simply copy and paste all 1-6 in step 1 and wait for a few mins to get the Pulsar service ready. Please Do NOT use minikube because it brought me many problems. 
  
+  If you run this and see pulsar-mini-proxy service has an CLUSTER-IP then your pods within this cluster can talk with Pulsar using this CLUSTER-IP. To get an EXTERNAL-IP, you might need to try EKS which provides you load-balancer, but CLUSTER-IP is enough for our case. 
+  
+  ` kubectl get service -n pulsar`
+  ![image](https://user-images.githubusercontent.com/45562036/160528277-0da91937-84ac-41f0-a339-6082e81782eb.png)
+ 
+  
 </details>
 
-
-<!-- **But** you will get broker connection error, because the `pulsar_bash` runs inside a container and it cannot communicate with host network. One solution is to run a `broker` background process along with the `bash_runtime` process in one container, but I think this is not scalable and practical. I am having diffciluity on deploying this [pulsar-standalone](https://hub.docker.com/r/apachepulsar/pulsar-standalone) on k8s. If succesfully, I can expose it as a service and then my `bash_runtime` can talk with broker ...
- -->
  
 Next, we show how to run a Pulsar cluster on kubernetes, and let the bash function deployment to communicate with this kubernets Pulsar instead of local Pulsar binary.  
